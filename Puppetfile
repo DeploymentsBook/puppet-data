@@ -1,3 +1,6 @@
+# Deployments module
+mod 'deploys',
+  :git => "https://github.com/DeploymentsBook/puppet-deployments.git"
 
 # Puppet helpers
 mod 'stdlib',
@@ -24,18 +27,28 @@ mod 'staging',
   :ref => '0.4.0'
 
 # OpenStack Modules
-# XXX need to pin
+# XXX need to pin these
+# XXX switch to kilo when it ships
 mod 'nova',
-  :git => 'https://github.com/openstack/puppet-nova.git'
+  :git => 'https://github.com/openstack/puppet-nova.git',
+  :ref => 'stable/juno'
 
 mod 'glance',
-  :git => 'https://github.com/openstack/puppet-glance.git'
+  :git => 'https://github.com/openstack/puppet-glance.git',
+  :ref => 'stable/juno'
 
 mod 'cinder',
-  :git => 'https://github.com/openstack/puppet-cinder.git'
+  :git => 'https://github.com/openstack/puppet-cinder.git',
+  :ref => 'stable/juno'
 
 mod 'keystone',
-  :git => 'https://github.com/openstack/puppet-keystone.git'
+  :git => 'https://github.com/openstack/puppet-keystone.git',
+  :ref => 'stable/juno'
+
+mod 'neutron',
+  :git => 'https://github.com/openstack/puppet-neutron.git',
+  :ref => 'stable/juno'
 
 mod 'openstacklib',
-  :git => 'https://github.com/openstack/puppet-openstacklib.git'
+  :git => 'https://github.com/openstack/puppet-openstacklib.git',
+  :ref => 'stable/juno'

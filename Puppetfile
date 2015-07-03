@@ -36,3 +36,6 @@ mod 'cinder',
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git'
+
+mod 'openstacklib',
+  :git => 'https://github.com/openstack/puppet-openstacklib.git'

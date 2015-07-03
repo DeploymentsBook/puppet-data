@@ -1,3 +1,4 @@
+---
 # Hosts & IPs
 control_node: 'localhost'
 
@@ -9,8 +10,8 @@ keystone::roles::admin::email: "root@%{hiera('control_node')}"
 
 # Don't change these
 keystone::package_ensure: "latest"
-keystone::public_endpoint: "http://%{hiera('control_node')}:5000" &public_endpoint
-keystone::admin_endpoint: "http://%{hiera('control_node')}:35357" &admin_endpoint
+keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000" 
+keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357" 
 
 keystone::endpoint::public_url: *public_endpoint
 keystone::endpoint::admin_url: *admin_endpoint

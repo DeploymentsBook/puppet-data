@@ -1,0 +1,12 @@
+.*.swp
+*~
+.keep
+.librarian
+.tmp
+environments/
+modules/
+templates/
+puppet.conf
+puppetdb.conf
+Gemfile.lock
+Puppetfile.lock

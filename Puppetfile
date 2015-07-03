@@ -1,5 +1,5 @@
 # Deployments module
-mod 'deploys',
+mod 'deployments',
   :git => "https://github.com/DeploymentsBook/puppet-deployments.git"
 
 # Puppet helpers

@@ -11,24 +11,31 @@ glance::registry::debug: *debug
 # Passwords
 keystone::admin_token: "secret_token"
 keystone::roles::admin::password: &admin_pass "admin_pass"
-glance::api::keystone_password: *admin_pass
-glance::registry::keystone_password: *admin_pass
-glance::db::mysql::password: &db_pass "db_pass"
-glance::db::mysql::user: "glance"
 glance::keystone::auth::password: &service_user_pass "service_user_pass"
+glance::api::keystone_password: *service_user_pass
+glance::registry::keystone_password: *service_user_pass
 
 keystone::roles::admin::email: "root@%{hiera('control_node')}"
 
 # Database stuff
 glance::registry::database_connection: &glance_db_connection "mysql://glance:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
 glance::api::database_connection: *glance_db_connection
+glance::db::mysql::password: &db_pass "db_pass"
+glance::db::mysql::user: "glance"
+glance::db::mysql::allowed_hosts: "%{hiera('control_node')}"
 
-# Keystone - Don't change these
+# Package Ensures
 keystone::package_ensure: "latest"
+glance::package_ensure: "latest"
+
+# Endpoint stuff
 keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000" 
 keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357" 
 
 keystone::endpoint::public_url: *public_endpoint
 keystone::endpoint::admin_url: *admin_endpoint
+glance::keystone::auth::public_url: &glance_url "http://%{hiera('control_node')}:9292"
+glance::keystone::auth::internal_url: *glance_url
+glance::keystone::auth::admin_url: *glance_url
 
 openstacklib::openstackclient::package_ensure: "latest"

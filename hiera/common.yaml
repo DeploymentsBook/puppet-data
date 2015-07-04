@@ -1,6 +1,6 @@
 ---
 # Hosts & IPs
-control_node: 'localhost'
+control_node: &control_node 'localhost'
 
 # Set to true to enable debug mode!
 debug: &debug "false"
@@ -18,11 +18,15 @@ glance::registry::keystone_password: *service_user_pass
 keystone::roles::admin::email: "root@%{hiera('control_node')}"
 
 # Database stuff
-glance::registry::database_connection: &glance_db_connection "mysql://glance:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
+glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
 glance::api::database_connection: *glance_db_connection
 glance::db::mysql::password: &db_pass "db_pass"
 glance::db::mysql::user: "glance"
-glance::db::mysql::allowed_hosts: "%{hiera('control_node')}"
+glance::db::mysql::allowed_hosts: *control_node
+keystone::database_connection: "mysql://%{hiera('keystone::db::mysql::user')}:%{hiera('keystone::db::mysql::password')}@%{hiera('control_node')}/keystone"
+keystone::db::mysql::password: &db_pass "db_pass"
+keystone::db::mysql::user: "keystone"
+keystone::db::mysql::allowed_hosts: *control_node
 
 # Package Ensures
 keystone::package_ensure: "latest"

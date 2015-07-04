@@ -2,6 +2,9 @@
 # Hosts & IPs
 control_node: &control_node 'localhost'
 
+# Version of CirrOS to install
+deployments::profile::glance::cirros_version: "0.3.4"
+
 # Set to true to enable debug mode!
 debug: &debug "false"
 keystone::debug: *debug

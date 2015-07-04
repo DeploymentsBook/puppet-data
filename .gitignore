@@ -9,3 +9,4 @@ templates/
 puppetdb.conf
 Gemfile.lock
 Puppetfile.lock
+.tmp/

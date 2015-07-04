@@ -1,6 +1,7 @@
 # Deployments module
 mod 'deployments',
-  :git => "https://github.com/DeploymentsBook/puppet-deployments.git"
+  :git => "https://github.com/DeploymentsBook/puppet-deployments.git",
+  :ref => 'master'
 
 # Puppet helpers
 mod 'stdlib',
@@ -25,6 +26,10 @@ mod 'rabbitmq',
 mod 'staging',
   :git => 'https://github.com/nanliu/puppet-staging.git',
   :ref => '0.4.0'
+
+mod 'apt',
+  :git => "https://github.com/puppetlabs/puppetlabs-apt.git",
+  :ref => '2.1.0'
 
 # OpenStack Modules
 # XXX need to pin these

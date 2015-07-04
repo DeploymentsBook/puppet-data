@@ -12,9 +12,15 @@ cinder::debug: *debug
 glance::api::debug: *debug
 glance::registry::debug: *debug
 
-# Passwords
+# Passwords & Openrc
+admin_password: &admin_password "admin_pass"
+admin_tenant: &admin_tenant "openstack"
+admin_user: &admin_user "admin"
+region_name: "RegionOne"
 keystone::admin_token: "secret_token"
-keystone::roles::admin::password: &admin_pass "admin_pass"
+keystone::roles::admin::password: *admin_password
+keystone::roles::admin::admin_tenant: *admin_tenant
+keystone::roles::admin::admin: *admin_user
 glance::keystone::auth::password: &service_user_pass "service_user_pass"
 glance::api::keystone_password: *service_user_pass
 glance::registry::keystone_password: *service_user_pass
@@ -64,3 +70,4 @@ cinder::keystone::auth::internal_address: "%{hiera('control_node')}"
 cinder::keystone::auth::admin_address: "%{hiera('control_node')}"
 
 openstacklib::openstackclient::package_ensure: "latest"
+

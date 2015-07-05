@@ -11,12 +11,13 @@ keystone::debug: *debug
 cinder::debug: *debug
 glance::api::debug: *debug
 glance::registry::debug: *debug
+nova::debug: *debug
 
 # Passwords & Openrc
 admin_password: &admin_password "admin_pass"
 admin_tenant: &admin_tenant "openstack"
 admin_user: &admin_user "admin"
-region_name: "RegionOne"
+region_name: &region_name "RegionOne"
 keystone::admin_token: "secret_token"
 keystone::roles::admin::password: *admin_password
 keystone::roles::admin::admin_tenant: *admin_tenant
@@ -26,6 +27,8 @@ glance::api::keystone_password: *service_user_pass
 glance::registry::keystone_password: *service_user_pass
 cinder::api::keystone_password: *service_user_pass
 cinder::keystone::auth::password: *service_user_pass
+nova::keystone::auth::password: *service_user_pass
+nova::api::admin_password: *service_user_pass
 rabbit_password: &rabbit_password "elmer_fudd"
 cinder::rabbit_password: *rabbit_password
 
@@ -45,6 +48,10 @@ cinder::database_connection: "mysql://%{hiera('cinder::db::mysql::user')}:%{hier
 cinder::db::mysql::password: &db_pass "db_pass"
 cinder::db::mysql::user: "cinder"
 cinder::db::mysql::allowed_hosts: *control_node
+nova::db::database_connection: "mysql://%{hiera('nova::db::mysql::user')}:%{hiera('nova::db::mysql::password')}@%{hiera('control_node')}/nova"
+nova::db::mysql::password: &db_pass "db_pass"
+nova::db::mysql::user: "nova"
+nova::db::mysql::allowed_hosts: *control_node
 
 # Package Ensures
 cinder::package_ensure: "latest"
@@ -55,11 +62,22 @@ keystone::package_ensure: "latest"
 glance::package_ensure: "latest"
 glance::api::package_ensure: "latest"
 glance::registry::package_ensure: "latest"
+nova::api::enabled: true
+nova::cert::enabled: true
+nova::compute::enabled: true
+nova::conductor::enabled: true
+nova::objectstore::enabled: true
+nova::scheduler::enabled: true
+nova::vncproxy::enabled: true
+nova::volume::enabled: true
+nova::client::ensure: latest
+nova::ensure_package: latest
+nova::compute::ensure_package: latest
+openstacklib::openstackclient::package_ensure: "latest"
 
 # Endpoint stuff
 keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000" 
 keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357" 
-
 keystone::endpoint::public_url: *public_endpoint
 keystone::endpoint::admin_url: *admin_endpoint
 glance::keystone::auth::public_url: &glance_url "http://%{hiera('control_node')}:9292"
@@ -68,6 +86,14 @@ glance::keystone::auth::admin_url: *glance_url
 cinder::keystone::auth::public_address: "%{hiera('control_node')}"
 cinder::keystone::auth::internal_address: "%{hiera('control_node')}"
 cinder::keystone::auth::admin_address: "%{hiera('control_node')}"
+nova::keystone::auth::configure_ec2_endpoint: false
+nova::keystone::auth::internal_address: "%{hiera('control_node')}"
+nova::keystone::auth::public_address: "%{hiera('control_node')}"
+nova::keystone::auth::admin_address: "%{hiera('control_node')}"
+nova::api::auth_host: "%{hiera('control_node')}"
+nova::os_region_name: *region_name
+nova::api::resume_guests_state_on_host_boot: true
+nova::api::service_neutron_metadata_proxy: true
+nova::vncproxy::host: "%{hiera('control_node')}"
 
-openstacklib::openstackclient::package_ensure: "latest"
-
+nova::vncproxy::host: "%{hiera('control_node')}"

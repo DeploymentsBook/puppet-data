@@ -29,10 +29,6 @@ cinder::api::keystone_password: *service_user_pass
 cinder::keystone::auth::password: *service_user_pass
 nova::keystone::auth::password: *service_user_pass
 nova::api::admin_password: *service_user_pass
-rabbit_password: &rabbit_password "elmer_fudd"
-cinder::rabbit_password: *rabbit_password
-
-keystone::roles::admin::email: "root@%{hiera('control_node')}"
 
 # Database stuff
 glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
@@ -70,9 +66,9 @@ nova::objectstore::enabled: true
 nova::scheduler::enabled: true
 nova::vncproxy::enabled: true
 nova::volume::enabled: true
-nova::client::ensure: latest
-nova::ensure_package: latest
-nova::compute::ensure_package: latest
+nova::client::ensure: "latest"
+nova::ensure_package: "latest"
+nova::compute::ensure_package: "latest"
 openstacklib::openstackclient::package_ensure: "latest"
 
 # Endpoint stuff
@@ -96,4 +92,22 @@ nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true
 nova::vncproxy::host: "%{hiera('control_node')}"
 
-nova::vncproxy::host: "%{hiera('control_node')}"
+keystone::roles::admin::email: "root@%{hiera('control_node')}"
+
+# Rabbit
+rabbitmq::server::node_ip_address: '0.0.0.0'
+rabbit_password: &rabbit_password "elmer_fudd"
+cinder::rabbit_password: *rabbit_password
+neutron::rabbit_password: *rabbit_password
+nova::rabbit_password: *rabbit_password
+nova::rabbitmq::password: *rabbit_password
+rabbit_host: &rabbit_host "%{hiera('control_node')}"
+cinder::rabbit_host: *rabbit_host
+nova::rabbit_host: *rabbit_host
+neutron::rabbit_host: *rabbit_host
+rabbit_user: &rabbit_user "rabbit_user"
+cinder::rabbit_userid: *rabbit_user
+nova::rabbitmq::userid: *rabbit_user
+nova::rabbit_userid: *rabbit_user
+neutron::rabbit_user: *rabbit_user
+rabbitmq::server::port: 5672

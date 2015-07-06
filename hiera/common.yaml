@@ -111,3 +111,20 @@ nova::rabbitmq::userid: *rabbit_user
 nova::rabbit_userid: *rabbit_user
 neutron::rabbit_user: *rabbit_user
 rabbitmq::server::port: 5672
+
+deployments::profile::users::project: "test_project"
+deployments::profile::users::username: "test"
+deployments::profile::users::password: "test"
+
+# openrc stuff
+deployments::profile::openrcs::openrcs:
+  "%{hiera('admin_user')}":
+     "path": "/root/openrc.%{hiera('admin_user')}"
+     "tenant": "%{hiera('admin_tenant')}"
+     "user": "%{hiera('admin_user')}"
+     "password": "%{hiera('admin_password')}"
+  "%{hiera('deployments::profile::users::username')}":
+     "path": "/root/openrc.%{hiera('deployments::profile::users::username')}"
+     "tenant": "%{hiera('deployments::profile::users::project')}"
+     "user": "%{hiera('deployments::profile::users::username')}"
+     "password": "%{hiera('deployments::profile::users::password')}"

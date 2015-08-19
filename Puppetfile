@@ -32,28 +32,30 @@ mod 'apt',
   :ref => '2.1.0'
 
 # OpenStack Modules
-# XXX need to pin these
-# XXX switch to kilo when it ships
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'
 
 mod 'glance',
   :git => 'https://github.com/openstack/puppet-glance.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'
 
 mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'
 
 mod 'neutron',
   :git => 'https://github.com/openstack/puppet-neutron.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'
+
+mod 'horizon',
+  :git => 'https://github.com/openstack/puppet-horizon.git',
+  :ref => 'stable/kilo'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
-  :ref => 'stable/juno'
+  :ref => 'stable/kilo'

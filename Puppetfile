@@ -31,6 +31,10 @@ mod 'apt',
   :git => "https://github.com/puppetlabs/puppetlabs-apt.git",
   :ref => '2.1.0'
 
+mod "apache",
+  :git => "https://github.com/puppetlabs/puppetlabs-apache",
+  :ref => '1.6.0'
+
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',

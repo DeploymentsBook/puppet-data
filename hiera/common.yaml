@@ -112,6 +112,9 @@ nova::rabbit_userid: *rabbit_user
 neutron::rabbit_user: *rabbit_user
 rabbitmq::server::port: 5672
 
+# horizon
+horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'
+
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
 deployments::profile::users::password: "test"

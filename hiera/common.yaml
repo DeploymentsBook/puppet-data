@@ -72,22 +72,28 @@ nova::compute::ensure_package: "latest"
 openstacklib::openstackclient::package_ensure: "latest"
 
 # Endpoint stuff
-keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000" 
-keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357" 
+keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000"
+keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357"
 keystone::endpoint::public_url: *public_endpoint
 keystone::endpoint::admin_url: *admin_endpoint
 glance::keystone::auth::public_url: &glance_url "http://%{hiera('control_node')}:9292"
 glance::keystone::auth::internal_url: *glance_url
 glance::keystone::auth::admin_url: *glance_url
-cinder::keystone::auth::public_url: &cinder_api_url "http://%{hiera('control_node')}:8776"
+cinder::keystone::auth::public_url: &cinder_api_url "http://%{hiera('control_node')}:8776/v1/%(tenant_id)s"
 cinder::keystone::auth::internal_url: *cinder_api_url
 cinder::keystone::auth::admin_url: *cinder_api_url
 nova::keystone::auth::configure_ec2_endpoint: false
-nova::keystone::auth::internal_url: &nova_api_url "%{hiera('control_node')}:8774/v2"
+nova::keystone::auth::internal_url: &nova_api_url "http://%{hiera('control_node')}:8774/v2/%(tenant_id)s"
 nova::keystone::auth::public_url: *nova_api_url
 nova::keystone::auth::admin_url: *nova_api_url
-nova::api::auth_uri: "http://%{hiera('control_node')}:35357/v2"
-nova::api::identity_uri: "http://%{hiera('control_node')}:5000/v2"
+nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
+nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
+cinder::api::auth_uri: *auth_uri
+cinder::api::identity_uri: *identity_uri
+glance::api::auth_uri: *auth_uri
+glance::api::identity_uri: *identity_uri
+glance::registry::auth_uri: *auth_uri
+glance::registry::identity_uri: *identity_uri
 nova::os_region_name: *region_name
 nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true

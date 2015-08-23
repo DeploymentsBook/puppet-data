@@ -29,7 +29,7 @@ mod 'staging',
 
 mod 'apt',
   :git => "https://github.com/puppetlabs/puppetlabs-apt.git",
-  :ref => '2.1.0'
+  :ref => '1.7.0'
 
 mod "apache",
   :git => "https://github.com/puppetlabs/puppetlabs-apache",

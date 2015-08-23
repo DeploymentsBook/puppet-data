@@ -58,6 +58,7 @@ keystone::package_ensure: "latest"
 glance::package_ensure: "latest"
 glance::api::package_ensure: "latest"
 glance::registry::package_ensure: "latest"
+horizon::package_ensure: "latest"
 nova::api::enabled: true
 nova::cert::enabled: true
 nova::compute::enabled: true
@@ -121,6 +122,10 @@ rabbitmq::server::port: 5672
 
 # horizon
 horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'
+horizon::keystone_url: "http://%{hiera('control_node')}:5000/v2"
+horizon::fqdn:
+ - "*"
+horizon::compress_offline: false
 
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"

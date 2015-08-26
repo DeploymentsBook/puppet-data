@@ -63,3 +63,7 @@ mod 'horizon',
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
   :ref => 'stable/kilo'
+
+mod 'openstack_extras',
+  :git => 'https://github.com/openstack/puppet-openstack_extras.git',
+  :ref => 'stable/kilo'

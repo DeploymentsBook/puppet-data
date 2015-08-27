@@ -131,6 +131,10 @@ deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
 deployments::profile::users::password: "test"
 
+# cinder stuff
+cinder::setup_test_volume::size: 10G
+cinder::setup_test_volume::volume_path: '/var/lib/cinder/volumes'
+
 # openrc stuff
 deployments::profile::openrcs::openrcs:
   "%{hiera('admin_user')}":

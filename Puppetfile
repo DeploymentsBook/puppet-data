@@ -67,3 +67,7 @@ mod 'openstacklib',
 mod 'openstack_extras',
   :git => 'https://github.com/openstack/puppet-openstack_extras.git',
   :ref => 'stable/kilo'
+
+mod 'vswitch',
+  :git => 'https://github.com/openstack/puppet-vswitch.git',
+  :ref => 'stable/kilo'

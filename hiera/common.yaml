@@ -123,7 +123,7 @@ rabbitmq::server::port: 5672
 # horizon
 horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'
 horizon::keystone_url: "http://%{hiera('control_node')}:5000/v2"
-horizon::fqdn:
+horizon::allowed_hosts:
  - "*"
 horizon::compress_offline: false
 

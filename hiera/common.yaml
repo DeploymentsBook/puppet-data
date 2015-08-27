@@ -154,6 +154,10 @@ horizon::allowed_hosts:
  - "*"
 horizon::compress_offline: false
 
+# Keystone
+keystone::wsgi::apache::ssl: false
+keystone::service_name: 'httpd'
+
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
 deployments::profile::users::password: "test"

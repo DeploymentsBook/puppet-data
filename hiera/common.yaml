@@ -97,16 +97,6 @@ neutron::ensure_package: *package_ensure
 neutron::plugins::ml2::ensure_package: *package_ensure
 openstacklib::openstackclient::package_ensure: *package_ensure
 
-# Nova stuff
-nova::api::enabled: true
-nova::cert::enabled: true
-nova::compute::enabled: true
-nova::conductor::enabled: true
-nova::objectstore::enabled: true
-nova::scheduler::enabled: true
-nova::vncproxy::enabled: true
-nova::volume::enabled: true
-
 # Endpoint stuff
 keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000"
 keystone::admin_endpoint: &admin_endpoint "http://%{hiera('control_node')}:35357"
@@ -139,6 +129,18 @@ nova::os_region_name: *region_name
 nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true
 nova::vncproxy::host: "%{hiera('control_node')}"
+nova::api::enabled: true
+nova::cert::enabled: true
+nova::compute::enabled: true
+nova::conductor::enabled: true
+nova::objectstore::enabled: true
+nova::scheduler::enabled: true
+nova::vncproxy::enabled: true
+nova::volume::enabled: true
+nova::compute::vnc_enabled: true
+nova::compute::libvirt::libvirt_virt_type: 'qemu'
+nova::compute::libvirt::migration_support: true
+nova::compute::libvirt::vncserver_listen: '0.0.0.0'
 
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'

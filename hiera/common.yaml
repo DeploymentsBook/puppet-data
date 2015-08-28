@@ -98,6 +98,10 @@ nova::volume::enabled: true
 nova::client::ensure: "latest"
 nova::ensure_package: "latest"
 nova::compute::ensure_package: "latest"
+neutron::client::ensure_package: "latest"
+neutron::server::ensure_package: "latest"
+neutron::ensure_package: "latest"
+neutron::plugins::ml2::ensure_package: "latest"
 openstacklib::openstackclient::package_ensure: "latest"
 
 # Endpoint stuff
@@ -117,6 +121,8 @@ nova::keystone::auth::public_url: *nova_api_url
 nova::keystone::auth::admin_url: *nova_api_url
 nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
 nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
+neutron::api::auth_uri: *auth_uri
+neutron::api::identity_uri: *identity_uri
 cinder::api::auth_uri: *auth_uri
 cinder::api::identity_uri: *identity_uri
 glance::api::auth_uri: *auth_uri

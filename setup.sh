@@ -7,4 +7,4 @@ sudo cp -a * /etc/puppet
 sudo service puppet restart
 
 cd /etc/puppet
-librarian-puppet install --clean
+sudo librarian-puppet install --clean

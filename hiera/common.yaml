@@ -78,15 +78,26 @@ keystone::sync_db: *sync_db
 glance::registry::sync_db: *sync_db
 
 # Package Ensures
-cinder::package_ensure: "latest"
-cinder::volume::package_ensure: "latest"
-cinder::client::package_ensure: "latest"
-cinder::scheduler::package_ensure: "latest"
-keystone::package_ensure: "latest"
-glance::package_ensure: "latest"
-glance::api::package_ensure: "latest"
-glance::registry::package_ensure: "latest"
-horizon::package_ensure: "latest"
+package_ensure: &package_ensure "latest"
+cinder::package_ensure: *package_ensure
+cinder::volume::package_ensure: *package_ensure
+cinder::client::package_ensure: *package_ensure
+cinder::scheduler::package_ensure: *package_ensure
+keystone::package_ensure: *package_ensure
+glance::package_ensure: *package_ensure
+glance::api::package_ensure: *package_ensure
+glance::registry::package_ensure: *package_ensure
+horizon::package_ensure: *package_ensure
+nova::client::ensure: *package_ensure
+nova::ensure_package: *package_ensure
+nova::compute::ensure_package: *package_ensure
+neutron::client::ensure_package: *package_ensure
+neutron::server::ensure_package: *package_ensure
+neutron::ensure_package: *package_ensure
+neutron::plugins::ml2::ensure_package: *package_ensure
+openstacklib::openstackclient::package_ensure: *package_ensure
+
+# Nova stuff
 nova::api::enabled: true
 nova::cert::enabled: true
 nova::compute::enabled: true
@@ -95,14 +106,6 @@ nova::objectstore::enabled: true
 nova::scheduler::enabled: true
 nova::vncproxy::enabled: true
 nova::volume::enabled: true
-nova::client::ensure: "latest"
-nova::ensure_package: "latest"
-nova::compute::ensure_package: "latest"
-neutron::client::ensure_package: "latest"
-neutron::server::ensure_package: "latest"
-neutron::ensure_package: "latest"
-neutron::plugins::ml2::ensure_package: "latest"
-openstacklib::openstackclient::package_ensure: "latest"
 
 # Endpoint stuff
 keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000"

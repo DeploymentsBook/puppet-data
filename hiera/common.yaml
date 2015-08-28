@@ -26,7 +26,7 @@ nova::verbose: *verbose
 neutron::agents::l3::verbose: *debug
 neutron::agents::dhcp::verbose: *debug
 
-# Passwords & Openrc
+# Passwords
 admin_password: &admin_password "admin_pass"
 admin_tenant: &admin_tenant "openstack"
 admin_user: &admin_user "admin"
@@ -160,10 +160,6 @@ horizon::compress_offline: false
 keystone::wsgi::apache::ssl: false
 keystone::service_name: 'httpd'
 
-deployments::profile::users::project: "test_project"
-deployments::profile::users::username: "test"
-deployments::profile::users::password: "test"
-
 # cinder stuff
 cinder::setup_test_volume::size: 10G
 cinder::setup_test_volume::volume_path: '/var/lib/cinder/volumes'
@@ -184,7 +180,10 @@ neutron::agents::ml2::ovs:local_ip: '127.0.0.1'
 neutron::agents::ml2::ovs:tunnel_types:
  - 'vxlan'
 
-# openrc stuff
+# test user & openrc stuff
+deployments::profile::users::project: "test_project"
+deployments::profile::users::username: "test"
+deployments::profile::users::password: "test"
 deployments::profile::openrcs::openrcs:
   "%{hiera('admin_user')}":
      "path": "/root/openrc.%{hiera('admin_user')}"

@@ -50,7 +50,7 @@ nova::api::admin_password: *service_user_pass
 neutron::server::auth_password: *service_user_pass
 neutron::server::notifications::nova_admin_password: *service_user_pass
 neutron::agents::metadata::auth_password: *service_user_pass
-neutron::agents::metadata::shared_secret: "something_secret"
+neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 
 # Database stuff
 glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@localhost/glance"
@@ -158,6 +158,7 @@ nova::scheduler::enabled: true
 nova::vncproxy::enabled: true
 nova::volume::enabled: true
 nova::compute::vnc_enabled: true
+nova::api::neutron_metadata_proxy_shared_secret: *shared_secret
 nova::compute::libvirt::libvirt_virt_type: 'qemu'
 nova::compute::libvirt::migration_support: true
 nova::compute::libvirt::vncserver_listen: '0.0.0.0'
@@ -205,16 +206,18 @@ neutron::allow_overlapping_ips: true
 neutron::core_plugin: 'ml2'
 neutron::service_plugin:
  - 'router'
-neutron::plugins::ml2:type_drivers:
+neutron::plugins::ml2::type_drivers:
  - 'vxlan'
-neutron::plugins::ml2:tenant_network_types:
+neutron::plugins::ml2::tenant_network_types:
  - 'vxlan'
-neutron::plugins::ml2:mechanism_drivers:
+neutron::plugins::ml2::mechanism_drivers:
  - 'openvswitch'
 neutron::agents::ml2::ovs::enable_tunneling: true
 neutron::agents::ml2::ovs::local_ip: '127.0.0.1'
 neutron::agents::ml2::ovs::tunnel_types:
  - 'vxlan'
+neutron::service_plugins:
+ - 'router'
 
 # test user & openrc stuff
 deployments::profile::users::project: "test_project"

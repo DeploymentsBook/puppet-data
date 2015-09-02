@@ -115,14 +115,23 @@ glance::keystone::auth::admin_url: *glance_url
 cinder::keystone::auth::public_url: &cinder_api_url "http://%{hiera('control_node')}:8776/v1/%(tenant_id)s"
 cinder::keystone::auth::internal_url: *cinder_api_url
 cinder::keystone::auth::admin_url: *cinder_api_url
+cinder::keystone::auth::public_url_v2: *cinder_api_url
+cinder::keystone::auth::internal_url_v2: *cinder_api_url
+cinder::keystone::auth::admin_url_v2: *cinder_api_url
 nova::keystone::auth::configure_ec2_endpoint: false
 nova::keystone::auth::internal_url: &nova_api_url "http://%{hiera('control_node')}:8774/v2/%(tenant_id)s"
 nova::keystone::auth::public_url: *nova_api_url
 nova::keystone::auth::admin_url: *nova_api_url
+nova::keystone::auth::internal_url_v3: *nova_api_url
+nova::keystone::auth::public_url_v3: *nova_api_url
+nova::keystone::auth::admin_url_v3: *nova_api_url
 nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
 nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
 neutron::api::auth_uri: *auth_uri
 neutron::api::identity_uri: *identity_uri
+neutron::keystone::auth::public_url: &neutron_api_url "http://%{hiera('control_node')}:9696"
+neutron::keystone::auth::internal_url: *neutron_api_url
+neutron::keystone::auth::admin_url: *neutron_api_url
 cinder::api::auth_uri: *auth_uri
 cinder::api::identity_uri: *identity_uri
 glance::api::auth_uri: *auth_uri

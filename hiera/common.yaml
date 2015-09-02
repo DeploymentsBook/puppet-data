@@ -206,9 +206,9 @@ neutron::plugins::ml2:tenant_network_types:
  - 'vxlan'
 neutron::plugins::ml2:mechanism_drivers:
  - 'openvswitch'
-neutron::agents::ml2::ovs:enable_tunneling: true
-neutron::agents::ml2::ovs:local_ip: '127.0.0.1'
-neutron::agents::ml2::ovs:tunnel_types:
+neutron::agents::ml2::ovs::enable_tunneling: true
+neutron::agents::ml2::ovs::local_ip: '127.0.0.1'
+neutron::agents::ml2::ovs::tunnel_types:
  - 'vxlan'
 
 # test user & openrc stuff

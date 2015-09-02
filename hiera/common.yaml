@@ -161,6 +161,7 @@ nova::compute::vnc_enabled: true
 nova::compute::libvirt::libvirt_virt_type: 'qemu'
 nova::compute::libvirt::migration_support: true
 nova::compute::libvirt::vncserver_listen: '0.0.0.0'
+nova::glance_api_servers: *glance_url
 nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
 nova::network::neutron::neutron_admin_password: *service_user_pass
 nova::network::neutron::neutron_admin_auth_url: *identity_uri

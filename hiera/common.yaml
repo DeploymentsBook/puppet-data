@@ -90,7 +90,12 @@ glance::registry::package_ensure: *package_ensure
 horizon::package_ensure: *package_ensure
 nova::client::ensure: *package_ensure
 nova::ensure_package: *package_ensure
+nova::cert::ensure_package: *package_ensure
 nova::compute::ensure_package: *package_ensure
+nova::conductor::ensure_package: *package_ensure
+nova::consoleauth::ensure_package: *package_ensure
+nova::scheduler::ensure_package: *package_ensure
+nova::vncproxy::ensure_package: *package_ensure
 neutron::client::ensure_package: *package_ensure
 neutron::server::ensure_package: *package_ensure
 neutron::ensure_package: *package_ensure
@@ -132,8 +137,8 @@ nova::vncproxy::host: "%{hiera('control_node')}"
 nova::api::enabled: true
 nova::cert::enabled: true
 nova::compute::enabled: true
+nova::consoleauth::enabled: true
 nova::conductor::enabled: true
-nova::objectstore::enabled: true
 nova::scheduler::enabled: true
 nova::vncproxy::enabled: true
 nova::volume::enabled: true
@@ -141,6 +146,9 @@ nova::compute::vnc_enabled: true
 nova::compute::libvirt::libvirt_virt_type: 'qemu'
 nova::compute::libvirt::migration_support: true
 nova::compute::libvirt::vncserver_listen: '0.0.0.0'
+nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
+nova::network::neutron::neutron_admin_password: *service_user_pass
+nova::network::neutron::neutron_admin_auth_url: *identity_uri
 
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'
@@ -166,6 +174,7 @@ horizon::keystone_url: "http://%{hiera('control_node')}:5000/v2"
 horizon::allowed_hosts:
  - "*"
 horizon::compress_offline: false
+apache::default_vhost: false
 
 # Keystone
 keystone::wsgi::apache::ssl: false

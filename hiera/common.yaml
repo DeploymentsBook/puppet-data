@@ -16,6 +16,7 @@ nova::debug: *debug
 neutron::debug: *debug
 neutron::agents::l3::debug: *debug
 neutron::agents::dhcp::debug: *debug
+neutron::agents::metadata::debug: *debug
 
 # Set to true to enable verbose mode!
 verbose: &verbose "false"
@@ -26,6 +27,7 @@ glance::registry::verbose: *verbose
 nova::verbose: *verbose
 neutron::agents::l3::verbose: *debug
 neutron::agents::dhcp::verbose: *debug
+neutron::agents::metadata::verbose: *verbose
 
 # Passwords
 admin_password: &admin_password "admin_pass"
@@ -47,6 +49,8 @@ neutron::keystone::auth::password: *service_user_pass
 nova::api::admin_password: *service_user_pass
 neutron::server::auth_password: *service_user_pass
 neutron::server::notifications::nova_admin_password: *service_user_pass
+neutron::agents::metadata::auth_password: *service_user_pass
+neutron::agents::metadata::shared_secret: "something_secret"
 
 # Database stuff
 glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@localhost/glance"

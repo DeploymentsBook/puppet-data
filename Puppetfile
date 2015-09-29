@@ -48,6 +48,10 @@ mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
   :ref => 'stable/kilo'
 
+mod 'ceilometer',
+  :git => 'https://github.com/openstack/puppet-ceilometer.git',
+  :ref => 'stable/kilo'
+
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
   :ref => 'stable/kilo'

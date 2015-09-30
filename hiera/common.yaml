@@ -48,6 +48,8 @@ cinder::api::keystone_password: *service_user_pass
 cinder::keystone::auth::password: *service_user_pass
 ceilometer::keystone::auth::password: *service_user_pass
 ceilometer::api::keystone_password: *service_user_pass
+swift::keystone::auth::password: *service_user_pass
+swift::proxy::authtoken::admin_password: *service_user_pass
 nova::keystone::auth::password: *service_user_pass
 neutron::keystone::auth::password: *service_user_pass
 nova::api::admin_password: *service_user_pass
@@ -118,6 +120,13 @@ neutron::server::ensure_package: *package_ensure
 neutron::ensure_package: *package_ensure
 neutron::plugins::ml2::ensure_package: *package_ensure
 openstacklib::openstackclient::package_ensure: *package_ensure
+swift::client::ensure: *package_ensure
+swift::package_ensure: *package_ensure
+swift::storage::generic::package_ensure: *package_ensure
+swift::storage::object::package_ensure: *package_ensure
+swift::storage::container::package_ensure: *package_ensure
+swift::storage::account::package_ensure: *package_ensure
+swift::proxy::package_ensure: *package_ensure
 
 # Endpoint stuff
 keystone::public_endpoint: &public_endpoint "http://%{hiera('control_node')}:5000"
@@ -143,6 +152,9 @@ nova::keystone::auth::admin_url: *nova_api_url
 nova::keystone::auth::internal_url_v3: *nova_api_url
 nova::keystone::auth::public_url_v3: *nova_api_url
 nova::keystone::auth::admin_url_v3: *nova_api_url
+swift::keystone::auth::public_url: &swift_api_url "http://%{hiera('control_node')}:8080/v1/KEY_%(tenant_id)s"
+swift::keystone::auth::internal_url: *swift_api_url
+swift::keystone::auth::admin_url: *swift_api_url
 nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
 nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
 neutron::api::auth_uri: *auth_uri
@@ -157,6 +169,8 @@ glance::api::identity_uri: *identity_uri
 glance::registry::auth_uri: *auth_uri
 glance::registry::identity_uri: *identity_uri
 neutron::server::identity_uri: *identity_uri
+swift::proxy::authtoken::auth_uri: *auth_uri
+swift::proxy::authtoken::identity_uri: *identity_uri
 
 # Nova stuff
 nova::os_region_name: *region_name
@@ -239,6 +253,12 @@ neutron::service_plugins:
 # Ceilometer
 ceilometer::metering_secret: "ceilometer_secret"
 ceilometer::api::enabled: true
+
+# Swift
+swift::keystone::auth::configure_endpoint: true
+swift::keystone::auth::configure_s3_endpoint: false
+swift::swift_hash_suffix: 'secret_hash'
+swift::storage: '127.0.0.1'
 
 # test user & openrc stuff
 deployments::profile::users::project: "test_project"

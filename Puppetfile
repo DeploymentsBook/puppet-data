@@ -64,6 +64,10 @@ mod 'horizon',
   :git => 'https://github.com/openstack/puppet-horizon.git',
   :ref => 'stable/kilo'
 
+mod 'swift',
+  :git => 'https://github.com/openstack/puppet-swift.git',
+  :ref => 'stable/kilo'
+
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
   :ref => 'stable/kilo'

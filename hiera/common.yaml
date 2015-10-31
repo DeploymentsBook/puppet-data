@@ -276,6 +276,29 @@ swift::keystone::auth::configure_endpoint: true
 swift::keystone::auth::configure_s3_endpoint: false
 swift::swift_hash_suffix: 'secret_hash'
 swift::storage: '127.0.0.1'
+swift::proxy::pipeline:
+ - 'catch_errors'
+ - 'healthcheck'
+ - 'cache'
+ - 'tempurl'
+ - 'ratelimit'
+ - 'authtoken'
+ - 'keystone'
+ - 'formpost'
+ - 'staticweb'
+ - 'container_quotas'
+ - 'account_quotas'
+ - 'proxy-logging'
+ - 'proxy-server'
+swift::proxy::keystone::operator_roles: &swift_operator_roles
+ - 'Member'
+ - 'admin'
+ - 'SwiftOperator'
+swift::keystone::auth::operator_roles: *swift_operator_roles
+swift::proxy::proxy_local_net_ip: '127.0.0.1'
+swift::storage::all::storage_local_net_ip: '127.0.0.1'
+swift::storage::all::incoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
+swift::storage::all::outcoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
 
 # test user & openrc stuff
 deployments::profile::users::project: "test_project"

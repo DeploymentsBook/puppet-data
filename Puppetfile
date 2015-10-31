@@ -35,6 +35,18 @@ mod "apache",
   :git => "https://github.com/puppetlabs/puppetlabs-apache",
   :ref => '1.6.0'
 
+mod 'memcached',
+  :git => "https://github.com/saz/puppet-memcached.git",
+  :tag => 'v2.8.1'
+
+mod 'rsync',
+  :git => 'https://github.com/puppetlabs/puppetlabs-rsync.git',
+  :tag => '0.4.0'
+
+mod 'xinetd',
+  :git => 'https://github.com/puppetlabs/puppetlabs-xinetd.git',
+  :tag => '1.5.0'
+
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',

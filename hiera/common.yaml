@@ -328,6 +328,9 @@ swift_ring_account_devices:
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
 deployments::profile::users::password: "test"
+deployments::profile::users::roles:
+ - '_member_'
+ - 'SwiftOperator'
 deployments::profile::openrcs::openrcs:
   "%{hiera('admin_user')}":
      "path": "/root/openrc.%{hiera('admin_user')}"

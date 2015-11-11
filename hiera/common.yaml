@@ -155,9 +155,9 @@ nova::keystone::auth::admin_url: *nova_api_url
 nova::keystone::auth::internal_url_v3: *nova_api_url
 nova::keystone::auth::public_url_v3: *nova_api_url
 nova::keystone::auth::admin_url_v3: *nova_api_url
-swift::keystone::auth::public_url: &swift_api_url "http://%{hiera('control_node')}:8080/v1/KEY_%(tenant_id)s"
+swift::keystone::auth::public_url: &swift_api_url "http://%{hiera('control_node')}:8080/v1/%{hiera('swift::proxy::keystone::reseller_prefix')}%(tenant_id)s"
 swift::keystone::auth::internal_url: *swift_api_url
-swift::keystone::auth::admin_url: *swift_api_url
+swift::keystone::auth::admin_url: "http://%{hiera('control_node')}:8080/v1"
 nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
 nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
 neutron::api::auth_uri: *auth_uri
@@ -293,11 +293,15 @@ swift::proxy::pipeline:
  - 'account_quotas'
  - 'proxy-logging'
  - 'proxy-server'
-swift::proxy::keystone::operator_roles: &swift_operator_roles
+swift::proxy::keystone::operator_roles:
  - '_member_'
  - 'admin'
  - 'SwiftOperator'
-swift::keystone::auth::operator_roles: *swift_operator_roles
+swift::keystone::auth::operator_roles:
+ - 'admin'
+ - 'SwiftOperator'
+ - 'ResellerAdmin'
+swift::proxy::keystone::reseller_prefix: 'KEY_'
 swift::proxy::proxy_local_net_ip: '127.0.0.1'
 swift::storage::all::storage_local_net_ip: '127.0.0.1'
 swift::storage::all::incoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
@@ -317,10 +321,10 @@ swift_ring_container_devices:
     'zone': 1
     'weight': 1
 swift_ring_account_devices:
-  '127.0.0.1:6001/1':
+  '127.0.0.1:6002/1':
     'zone': 1
     'weight': 1
-  '127.0.0.1:6001/2':
+  '127.0.0.1:6002/2':
     'zone': 1
     'weight': 1
 

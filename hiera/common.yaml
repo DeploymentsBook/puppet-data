@@ -43,6 +43,7 @@ keystone::roles::admin::admin: *admin_user
 keystone::roles::admin::email: "root@%{hiera('control_node')}"
 keystone::roles::admin::admin_roles:
  - 'admin'
+ - '_member_'
  - 'SwiftOperator'
 glance::keystone::auth::password: &service_user_pass "service_user_pass"
 glance::api::keystone_password: *service_user_pass

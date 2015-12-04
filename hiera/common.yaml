@@ -165,6 +165,8 @@ neutron::api::identity_uri: *identity_uri
 neutron::keystone::auth::public_url: &neutron_api_url "http://%{hiera('control_node')}:9696"
 neutron::keystone::auth::internal_url: *neutron_api_url
 neutron::keystone::auth::admin_url: *neutron_api_url
+ceilometer::api::keystone_auth_uri: *auth_uri
+ceilometer::api::keystone_identity_uri: *identity_uri
 cinder::api::auth_uri: *auth_uri
 cinder::api::identity_uri: *identity_uri
 glance::api::auth_uri: *auth_uri

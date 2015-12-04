@@ -50,44 +50,44 @@ mod 'xinetd',
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'glance',
   :git => 'https://github.com/openstack/puppet-glance.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'ceilometer',
   :git => 'https://github.com/openstack/puppet-ceilometer.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'neutron',
   :git => 'https://github.com/openstack/puppet-neutron.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'horizon',
   :git => 'https://github.com/openstack/puppet-horizon.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'swift',
   :git => 'https://github.com/openstack/puppet-swift.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'openstack_extras',
   :git => 'https://github.com/openstack/puppet-openstack_extras.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'
 
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',
-  :ref => 'stable/kilo'
+  :ref => 'stable/liberty'

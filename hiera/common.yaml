@@ -63,7 +63,7 @@ neutron::agents::metadata::auth_password: *service_user_pass
 neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 
 # Database stuff
-glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@localhost/glance"
+glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
 glance::api::database_connection: *glance_db_connection
 glance::db::mysql::password: "db_pass"
 glance::db::mysql::user: "glance"

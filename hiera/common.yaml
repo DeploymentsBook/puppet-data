@@ -221,6 +221,7 @@ nova::rabbitmq::userid: *rabbit_user
 nova::rabbit_userid: *rabbit_user
 neutron::rabbit_user: *rabbit_user
 rabbitmq::server::port: 5672
+rabbitmq::delete_guest_user: true
 
 # horizon
 horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'

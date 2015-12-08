@@ -199,7 +199,8 @@ nova::compute::libvirt::vncserver_listen: '0.0.0.0'
 nova::glance_api_servers: *glance_url
 nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
 nova::network::neutron::neutron_admin_password: *service_user_pass
-nova::network::neutron::neutron_admin_auth_url: *identity_uri
+nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v2.0"
+nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'

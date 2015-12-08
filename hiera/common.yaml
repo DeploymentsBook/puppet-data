@@ -143,9 +143,9 @@ glance::keystone::auth::admin_url: *glance_url
 cinder::keystone::auth::public_url: &cinder_api_url "http://%{hiera('control_node')}:8776/v1/%(tenant_id)s"
 cinder::keystone::auth::internal_url: *cinder_api_url
 cinder::keystone::auth::admin_url: *cinder_api_url
-cinder::keystone::auth::public_url_v2: *cinder_api_url
-cinder::keystone::auth::internal_url_v2: *cinder_api_url
-cinder::keystone::auth::admin_url_v2: *cinder_api_url
+cinder::keystone::auth::public_url_v2: &cinder_api_url_v2 "http://%{hiera('control_node')}:8776/v2/%(tenant_id)s"
+cinder::keystone::auth::internal_url_v2: *cinder_api_url_v2
+cinder::keystone::auth::admin_url_v2: *cinder_api_url_v2
 ceilometer::keystone::auth::public_url: &ceilometer_api_url "http://%{hiera('control_node')}:8777"
 ceilometer::keystone::auth::internal_url: *ceilometer_api_url
 ceilometer::keystone::auth::admin_url: *ceilometer_api_url

@@ -216,24 +216,24 @@ nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'
 rabbit_password: &rabbit_password "elmer_fudd"
-ceilometer::rabbit_password: *rabbit_password
-cinder::rabbit_password: *rabbit_password
-neutron::rabbit_password: *rabbit_password
-nova::rabbit_password: *rabbit_password
-nova::rabbitmq::password: *rabbit_password
 rabbit_host: &rabbit_host "%{hiera('control_node')}"
-cinder::rabbit_host: *rabbit_host
-ceilometer::rabbit_host: *rabbit_host
-nova::rabbit_host: *rabbit_host
-neutron::rabbit_host: *rabbit_host
 rabbit_user: &rabbit_user "rabbit_user"
-cinder::rabbit_userid: *rabbit_user
-ceilometer::rabbit_userid: *rabbit_user
-nova::rabbitmq::userid: *rabbit_user
-nova::rabbit_userid: *rabbit_user
-neutron::rabbit_user: *rabbit_user
 rabbitmq::server::port: 5672
 rabbitmq::delete_guest_user: true
+ceilometer::rabbit_host: *rabbit_host
+ceilometer::rabbit_password: *rabbit_password
+ceilometer::rabbit_userid: *rabbit_user
+cinder::rabbit_host: *rabbit_host
+cinder::rabbit_password: *rabbit_password
+cinder::rabbit_userid: *rabbit_user
+nova::rabbit_password: *rabbit_password
+nova::rabbitmq::password: *rabbit_password
+nova::rabbit_host: *rabbit_host
+nova::rabbitmq::userid: *rabbit_user
+nova::rabbit_userid: *rabbit_user
+neutron::rabbit_host: *rabbit_host
+neutron::rabbit_password: *rabbit_password
+neutron::rabbit_user: *rabbit_user
 
 # horizon
 horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'

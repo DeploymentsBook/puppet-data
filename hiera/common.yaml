@@ -13,6 +13,9 @@ cinder::debug: *debug
 ceilometer::debug: *debug
 glance::api::debug: *debug
 glance::registry::debug: *debug
+ironic::debug: *debug
+ironic::inspector::debug: *debug
+ironic::logging::debug: *debug
 nova::debug: *debug
 neutron::debug: *debug
 neutron::agents::l3::debug: *debug
@@ -26,6 +29,9 @@ cinder::verbose: *verbose
 ceilometer::verbose: *verbose
 glance::api::verbose: *verbose
 glance::registry::verbose: *verbose
+ironic::verbose: *verbose
+ironic::inspector::verbose: *verbose
+ironic::logging::verbose: *verbose
 nova::verbose: *verbose
 neutron::agents::l3::verbose: *debug
 neutron::agents::dhcp::verbose: *debug
@@ -111,6 +117,11 @@ glance::package_ensure: *package_ensure
 glance::api::package_ensure: *package_ensure
 glance::registry::package_ensure: *package_ensure
 horizon::package_ensure: *package_ensure
+ironic::package_ensure: *package_ensure
+ironic::api::package_ensure: *package_ensure
+ironic::client::package_ensure: *package_ensure
+ironic::conductor::package_ensure: *package_ensure
+ironic::inspector::package_ensure: *package_ensure
 nova::client::ensure: *package_ensure
 nova::ensure_package: *package_ensure
 nova::cert::ensure_package: *package_ensure

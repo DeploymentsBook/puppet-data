@@ -80,6 +80,10 @@ mod 'swift',
   :git => 'https://github.com/openstack/puppet-swift.git',
   :ref => 'stable/liberty'
 
+mod 'ironic',
+  :git => 'https://github.com/openstack/puppet-ironic.git',
+  :ref => 'stable/liberty'
+
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
   :ref => 'stable/liberty'

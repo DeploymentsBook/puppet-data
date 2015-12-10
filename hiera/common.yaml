@@ -193,6 +193,8 @@ glance::api::auth_uri: *auth_uri
 glance::api::identity_uri: *identity_uri
 glance::registry::auth_uri: *auth_uri
 glance::registry::identity_uri: *identity_uri
+ironic::api::auth_uri: *auth_uri
+ironic::api::identity_uri: *identity_uri
 neutron::server::identity_uri: *identity_uri
 swift::proxy::authtoken::auth_uri: *auth_uri
 swift::proxy::authtoken::identity_uri: *identity_uri

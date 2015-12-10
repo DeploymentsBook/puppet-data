@@ -64,7 +64,7 @@ nova::keystone::auth::password: *service_user_pass
 neutron::keystone::auth::password: *service_user_pass
 nova::api::admin_password: *service_user_pass
 neutron::server::auth_password: *service_user_pass
-neutron::server::notifications::nova_admin_password: *service_user_pass
+neutron::server::notifications::password: *service_user_pass
 neutron::agents::metadata::auth_password: *service_user_pass
 neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 
@@ -184,6 +184,8 @@ neutron::api::auth_uri: *auth_uri
 neutron::api::identity_uri: *identity_uri
 neutron::server::auth_uri: *auth_uri
 neutron::server::identity_uri: *identity_uri
+neutron::server::notifications::auth_uri: *auth_uri
+neutron::server::notifications::identity_uri: *identity_uri
 neutron::keystone::auth::public_url: &neutron_api_url "http://%{hiera('control_node')}:9696"
 neutron::keystone::auth::internal_url: *neutron_api_url
 neutron::keystone::auth::admin_url: *neutron_api_url
@@ -300,6 +302,7 @@ neutron_subnet:
     dns_nameservers:
      - 8.8.8.8
      - 8.8.4.4
+neutron::server::notifications::os_region_name: *region_name
 
 # Ceilometer
 ceilometer::metering_secret: "ceilometer_secret"

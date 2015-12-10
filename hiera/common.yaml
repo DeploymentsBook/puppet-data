@@ -261,9 +261,12 @@ neutron::rabbit_user: *rabbit_user
 
 # horizon
 horizon::secret_key: 'abcfedghijklmnopqrstuvwxyz1234567890'
-horizon::keystone_url: "http://%{hiera('control_node')}:5000/v2.0"
+horizon::keystone_url: "http://%{hiera('control_node')}:5000/v3"
+# Note: insecure change to your IP Address if desired for better security
 horizon::allowed_hosts:
  - "*"
+horizon::api_versions:
+    'identity': 3
 horizon::compress_offline: false
 apache::default_vhost: false
 

@@ -48,3 +48,6 @@ openstack container list
 
 # Ironic - openstack client does not support ironic
 ironic node-list
+
+# OVS
+ovs-vsctl show

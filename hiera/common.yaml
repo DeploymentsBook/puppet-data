@@ -182,6 +182,8 @@ nova::api::auth_uri: &auth_uri "http://%{hiera('control_node')}:5000"
 nova::api::identity_uri: &identity_uri "http://%{hiera('control_node')}:35357"
 neutron::api::auth_uri: *auth_uri
 neutron::api::identity_uri: *identity_uri
+neutron::server::auth_uri: *auth_uri
+neutron::server::identity_uri: *identity_uri
 neutron::keystone::auth::public_url: &neutron_api_url "http://%{hiera('control_node')}:9696"
 neutron::keystone::auth::internal_url: *neutron_api_url
 neutron::keystone::auth::admin_url: *neutron_api_url

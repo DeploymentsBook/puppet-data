@@ -297,7 +297,7 @@ neutron::service_plugins:
  - 'router'
 neutron_network:
   Network1:
-    shared: false
+    shared: true
     router_external: true
     provider_network_type: 'vxlan'
     ensure: present

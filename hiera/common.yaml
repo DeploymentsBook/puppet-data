@@ -198,6 +198,8 @@ neutron::server::notifications::identity_uri: *keystone_admin_endpoint
 ceilometer::api::keystone_auth_uri: *keystone_public_endpoint
 ceilometer::api::keystone_identity_uri: *keystone_admin_endpoint
 cinder::api::auth_uri: *keystone_public_endpoint
+# This seems to need a version on the endpoint to avoid #LP1521639
+cinder::api::keymgr_encryption_auth_url: "http://%{hiera('control_node')}:5000/v3"
 cinder::api::identity_uri: *keystone_admin_endpoint
 glance::api::auth_uri: *keystone_public_endpoint
 glance::api::identity_uri: *keystone_admin_endpoint

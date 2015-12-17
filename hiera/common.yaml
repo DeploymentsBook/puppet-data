@@ -1,6 +1,20 @@
 ---
 # Hosts & IPs
 # CHANGEME
+# Edit the following line to set a test user password:
+deployments::profile::users::password: "test"
+# Edit the following subnet to match your network:
+neutron_subnet:
+  Subnet1:
+    gateway_ip: 10.190.0.1
+    network_name: Network1
+    cidr: 10.190.0.0/24
+    allocation_pools:
+      - start=10.190.0.5,end=10.190.0.254
+    enable_dhcp: false
+    dns_nameservers:
+     - 8.8.8.8
+     - 8.8.4.4
 control_node: &control_node '127.0.0.1'
 
 # Version of CirrOS to install
@@ -303,17 +317,6 @@ neutron_network:
     router_external: true
     provider_network_type: 'vxlan'
     ensure: present
-neutron_subnet:
-  Subnet1:
-    gateway_ip: 10.190.0.1
-    network_name: Network1
-    cidr: 10.190.0.0/24
-    allocation_pools:
-      - start=10.190.0.5,end=10.190.0.254
-    enable_dhcp: false
-    dns_nameservers:
-     - 8.8.8.8
-     - 8.8.4.4
 neutron::server::notifications::os_region_name: *region_name
 
 # Ceilometer
@@ -381,7 +384,6 @@ ironic::enable_drivers:
 # test user & openrc stuff
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
-deployments::profile::users::password: "test"
 deployments::profile::users::roles:
  - '_member_'
  - 'SwiftOperator'

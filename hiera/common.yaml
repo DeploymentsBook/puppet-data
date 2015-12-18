@@ -1,21 +1,21 @@
 ---
 # Hosts & IPs
-# CHANGEME
+# Edit the following line to set the IP address of your Control node.
+# This is the node where the API services, mysql, and RabbitMQ run.
+control_node: &control_node '127.0.0.1'
+
 # Edit the following lines to set a test user password
-# and rabbitmq password
 deployments::profile::users::password: "test"
+
+# Edit the following line to change the password for RabbitMQ.
+# Don't change the &rabbit_password portion.
 rabbit_password: &rabbit_password "elmer_fudd"
-# Edit the following lines to replace "db_pass" with
-# something more secure for access each component has to
-# the database
-neutron::db::mysql::password: "db_pass"
-glance::db::mysql::password: "db_pass"
-keystone::db::mysql::password: "db_pass"
-cinder::db::mysql::password: "db_pass"
-ceilometer::db::mysql::password: "db_pass"
-ironic::db::mysql::password: "db_pass"
-nova::db::mysql::password: "db_pass"
-neutron::db::mysql::password: "db_pass"
+
+# Edit the following line to replace the quoted "database_password"
+# with something more secure for access each component has to
+# the database.  Don't change the &db_pass portion.
+db_pass: &db_pass "database_password"
+
 # Edit the following subnet to match the network your
 # OpenStack deployment will use.
 neutron_subnet:
@@ -29,8 +29,6 @@ neutron_subnet:
     dns_nameservers:
      - 8.8.8.8
      - 8.8.4.4
-
-control_node: &control_node '127.0.0.1'
 
 # Version of CirrOS to install
 deployments::profile::glance::cirros_version: "0.3.4"
@@ -101,24 +99,31 @@ neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@%{hiera('control_node')}/glance"
 glance::api::database_connection: *glance_db_connection
 glance::db::mysql::user: "glance"
+glance::db::mysql::password: *db_pass
 glance::db::mysql::allowed_hosts: *control_node
 keystone::database_connection: "mysql://%{hiera('keystone::db::mysql::user')}:%{hiera('keystone::db::mysql::password')}@%{hiera('control_node')}/keystone"
 keystone::db::mysql::user: "keystone"
+keystone::db::mysql::password: *db_pass
 keystone::db::mysql::allowed_hosts: *control_node
 cinder::database_connection: "mysql://%{hiera('cinder::db::mysql::user')}:%{hiera('cinder::db::mysql::password')}@%{hiera('control_node')}/cinder"
 cinder::db::mysql::user: "cinder"
+cinder::db::mysql::password: *db_pass
 cinder::db::mysql::allowed_hosts: *control_node
 ceilometer::db::database_connection: "mysql://%{hiera('ceilometer::db::mysql::user')}:%{hiera('ceilometer::db::mysql::password')}@%{hiera('control_node')}/ceilometer"
 ceilometer::db::mysql::user: "ceilometer"
+ceilometer::db::mysql::password: *db_pass
 ceilometer::db::mysql::allowed_hosts: *control_node
 ironic::db::database_connection: "mysql://%{hiera('ironic::db::mysql::user')}:%{hiera('ironic::db::mysql::password')}@%{hiera('control_node')}/ironic"
 ironic::db::mysql::user: "ironic"
+ironic::db::mysql::password: *db_pass
 ironic::db::mysql::allowed_hosts: *control_node
 nova::db::database_connection: "mysql://%{hiera('nova::db::mysql::user')}:%{hiera('nova::db::mysql::password')}@%{hiera('control_node')}/nova"
 nova::db::mysql::user: "nova"
+nova::db::mysql::password: *db_pass
 nova::db::mysql::allowed_hosts: *control_node
 neutron::server::database_connection: "mysql://%{hiera('neutron::db::mysql::user')}:%{hiera('neutron::db::mysql::password')}@%{hiera('control_node')}/neutron"
 neutron::db::mysql::user: "neutron"
+neutron::db::mysql::password: *db_pass
 neutron::db::mysql::allowed_hosts: *control_node
 
 # Sync DB: should be true, don't change this

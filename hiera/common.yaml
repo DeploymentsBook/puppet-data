@@ -76,6 +76,8 @@ keystone::roles::admin::admin_roles:
  - 'admin'
  - '_member_'
  - 'SwiftOperator'
+keystone::roles::admin::admin_tenant_desc: "OpenStack Deployments Book Admin Project"
+keystone::roles::admin::service_tenant_desc: "OpenStack Deployments Book Services Project"
 glance::keystone::auth::password: &service_user_pass "service_user_pass"
 glance::api::keystone_password: *service_user_pass
 glance::registry::keystone_password: *service_user_pass

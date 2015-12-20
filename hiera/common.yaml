@@ -4,8 +4,11 @@
 # This is the node where the API services, mysql, and RabbitMQ run.
 control_node: &control_node '127.0.0.1'
 
-# Edit the following lines to set a test user password
+# Edit the following line to set a test user password
 deployments::profile::users::password: "test"
+
+# Edit the following line to set an admin user password
+admin_password: &admin_password "admin_pass"
 
 # Edit the following line to change the password for RabbitMQ.
 # Don't change the &rabbit_password portion.
@@ -15,6 +18,14 @@ rabbit_password: &rabbit_password "elmer_fudd"
 # with something more secure for access each component has to
 # the database.  Don't change the &db_pass portion.
 db_pass: &db_pass "database_password"
+
+# Edit the following so your services have more secure defaults,
+# You will likely not need to use these yourself while interacting
+# with your OpenStack deployment, but it's better if they are more
+# secure than the defaults provided.
+keystone::admin_token: "secret_token"
+glance::keystone::auth::password: &service_user_pass "service_user_pass"
+neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 
 # Edit the following subnet to match the network your
 # OpenStack deployment will use.
@@ -63,11 +74,9 @@ neutron::agents::dhcp::verbose: *debug
 neutron::agents::metadata::verbose: *verbose
 
 # Passwords
-admin_password: &admin_password "admin_pass"
 admin_tenant: &admin_tenant "openstack"
 admin_user: &admin_user "admin"
 region_name: &region_name "RegionOne"
-keystone::admin_token: "secret_token"
 keystone::roles::admin::password: *admin_password
 keystone::roles::admin::admin_tenant: *admin_tenant
 keystone::roles::admin::admin: *admin_user
@@ -78,7 +87,6 @@ keystone::roles::admin::admin_roles:
  - 'SwiftOperator'
 keystone::roles::admin::admin_tenant_desc: "OpenStack Deployments Book Admin Project"
 keystone::roles::admin::service_tenant_desc: "OpenStack Deployments Book Services Project"
-glance::keystone::auth::password: &service_user_pass "service_user_pass"
 glance::api::keystone_password: *service_user_pass
 glance::registry::keystone_password: *service_user_pass
 cinder::api::keystone_password: *service_user_pass
@@ -95,7 +103,6 @@ nova::api::admin_password: *service_user_pass
 neutron::server::auth_password: *service_user_pass
 neutron::server::notifications::password: *service_user_pass
 neutron::agents::metadata::auth_password: *service_user_pass
-neutron::agents::metadata::shared_secret: &shared_secret "something_secret"
 
 # Database stuff
 glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('glance::db::mysql::user')}:%{hiera('glance::db::mysql::password')}@127.0.0.1/glance"

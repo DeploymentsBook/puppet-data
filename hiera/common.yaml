@@ -110,31 +110,24 @@ glance::registry::database_connection: &glance_db_connection "mysql://%{hiera('g
 glance::api::database_connection: *glance_db_connection
 glance::db::mysql::user: "glance"
 glance::db::mysql::password: *db_pass
-glance::db::mysql::allowed_hosts: *control_node
 keystone::database_connection: "mysql://%{hiera('keystone::db::mysql::user')}:%{hiera('keystone::db::mysql::password')}@127.0.0.1/keystone"
 keystone::db::mysql::user: "keystone"
 keystone::db::mysql::password: *db_pass
-keystone::db::mysql::allowed_hosts: *control_node
 cinder::database_connection: "mysql://%{hiera('cinder::db::mysql::user')}:%{hiera('cinder::db::mysql::password')}@127.0.0.1/cinder"
 cinder::db::mysql::user: "cinder"
 cinder::db::mysql::password: *db_pass
-cinder::db::mysql::allowed_hosts: *control_node
 ceilometer::db::database_connection: "mysql://%{hiera('ceilometer::db::mysql::user')}:%{hiera('ceilometer::db::mysql::password')}@127.0.0.1/ceilometer"
 ceilometer::db::mysql::user: "ceilometer"
 ceilometer::db::mysql::password: *db_pass
-ceilometer::db::mysql::allowed_hosts: *control_node
 ironic::db::database_connection: "mysql://%{hiera('ironic::db::mysql::user')}:%{hiera('ironic::db::mysql::password')}@127.0.0.1/ironic"
 ironic::db::mysql::user: "ironic"
 ironic::db::mysql::password: *db_pass
-ironic::db::mysql::allowed_hosts: *control_node
 nova::db::database_connection: "mysql://%{hiera('nova::db::mysql::user')}:%{hiera('nova::db::mysql::password')}@127.0.0.1/nova"
 nova::db::mysql::user: "nova"
 nova::db::mysql::password: *db_pass
-nova::db::mysql::allowed_hosts: *control_node
 neutron::server::database_connection: "mysql://%{hiera('neutron::db::mysql::user')}:%{hiera('neutron::db::mysql::password')}@127.0.0.1/neutron"
 neutron::db::mysql::user: "neutron"
 neutron::db::mysql::password: *db_pass
-neutron::db::mysql::allowed_hosts: *control_node
 
 # Sync DB: should be true, don't change this
 sync_db: &sync_db true

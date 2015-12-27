@@ -47,6 +47,10 @@ mod 'xinetd',
   :git => 'https://github.com/puppetlabs/puppetlabs-xinetd.git',
   :tag => '1.5.0'
 
+mod 'ntp',
+  :git => 'https://github.com/puppetlabs/puppetlabs-ntp.git',
+  :tag => '4.1.2'
+
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',

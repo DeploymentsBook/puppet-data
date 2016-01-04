@@ -40,7 +40,7 @@ neutron_subnet:
     cidr: 10.190.0.0/24
     allocation_pools:
       - start=10.190.0.5,end=10.190.0.254
-    enable_dhcp: false
+    enable_dhcp: true
     dns_nameservers:
      - 8.8.8.8
      - 8.8.4.4

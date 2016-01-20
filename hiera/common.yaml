@@ -48,6 +48,16 @@ neutron_subnet:
     dns_nameservers:
      - 8.8.8.8
      - 8.8.4.4
+  ext-subnet:
+    gateway_ip: 203.0.113.1
+    network_name: ext-net
+    cidr: 203.0.113.0/24
+    allocation_pools:
+      - start=203.0.113.5,end=203.0.113.200
+    enable_dhcp: true
+    dns_nameservers:
+     - 8.8.8.8
+     - 8.8.4.4
 
 # Version of CirrOS to install
 deployments::profile::glance::cirros_version: "0.3.4"
@@ -326,6 +336,7 @@ neutron::service_plugin:
  - 'router'
 neutron::plugins::ml2::type_drivers:
  - 'vxlan'
+ - 'flat'
 neutron::plugins::ml2::tenant_network_types:
  - 'vxlan'
 neutron::plugins::ml2::mechanism_drivers:
@@ -339,8 +350,14 @@ neutron::service_plugins:
 neutron_network:
   Network1:
     shared: true
-    router_external: true
+    router_external: false
     provider_network_type: 'vxlan'
+    ensure: present
+  ext-net:
+    shared: true
+    router_external: true
+    provider_network_type: 'flat'
+    provider_physical_network: 'br-ex'
     ensure: present
 neutron::server::notifications::os_region_name: *region_name
 

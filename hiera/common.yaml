@@ -359,6 +359,11 @@ neutron_network:
     provider_network_type: 'flat'
     provider_physical_network: 'br-ex'
     ensure: present
+neutron_router:
+  Router1:
+    admin_state_up: true
+    ensure: present
+
 neutron::server::notifications::os_region_name: *region_name
 
 # Ceilometer

@@ -362,6 +362,11 @@ neutron_network:
 neutron_router:
   Router1:
     admin_state_up: true
+    tenant_name: 'test_project'
+    gateway_network_name: 'ext-net'
+    ensure: present
+neutron_router_interface:
+  Router1:ext-subnet:
     ensure: present
 
 neutron::server::notifications::os_region_name: *region_name

@@ -1,42 +1,44 @@
 # Deployments module
 mod 'deployments',
-  :git => "https://github.com/DeploymentsBook/puppet-deployments.git",
+  :git => 'https://github.com/DeploymentsBook/puppet-deployments.git',
   :ref => 'master'
 
 # Puppet helpers
 mod 'stdlib',
-  :git => "https://github.com/puppetlabs/puppetlabs-stdlib.git",
-  :ref => '4.6.0'
+  :git => 'https://github.com/puppetlabs/puppetlabs-stdlib.git',
+  :ref => '4.11.0'
 
 mod 'concat',
-  :git => "https://github.com/puppetlabs/puppetlabs-concat.git",
-  :ref => '1.2.1'
+  :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
+  :ref => '1.2.5'
 
 mod 'inifile',
-  :git => "https://github.com/puppetlabs/puppetlabs-inifile"
+  :git => 'https://github.com/puppetlabs/puppetlabs-inifile',
+  :ref => '1.4.3'
 
 mod 'mysql',
   :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
-  :ref => '3.3.0'
+  :ref => '3.6.2'
 
 mod 'rabbitmq',
-  :git => "https://github.com/puppetlabs/puppetlabs-rabbitmq.git",
-  :ref => '5.2.3'
+  :git => 'https://github.com/puppetlabs/puppetlabs-rabbitmq.git',
+  :ref => '5.3.1'
 
+# used by rabbitmq
 mod 'staging',
-  :git => 'https://github.com/nanliu/puppet-staging.git',
-  :ref => '0.4.0'
+  :git => 'https://github.com/voxpupuli/puppet-staging.git',
+  :ref => '1.0.4'
 
 mod 'apt',
-  :git => "https://github.com/puppetlabs/puppetlabs-apt.git",
-  :ref => '2.1.1'
+  :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
+  :ref => '2.2.1'
 
-mod "apache",
-  :git => "https://github.com/puppetlabs/puppetlabs-apache",
-  :ref => '1.6.0'
+mod 'apache',
+  :git => 'https://github.com/puppetlabs/puppetlabs-apache',
+  :ref => '1.8.1'
 
 mod 'memcached',
-  :git => "https://github.com/saz/puppet-memcached.git",
+  :git => 'https://github.com/saz/puppet-memcached.git',
   :tag => 'v2.8.1'
 
 mod 'rsync',

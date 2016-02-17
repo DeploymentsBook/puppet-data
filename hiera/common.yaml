@@ -322,7 +322,7 @@ horizon::compress_offline: false
 apache::default_vhost: false
 horizon::django_session_engine: 'django.contrib.sessions.backends.cache'
 horizon::cache_backend: 'django.core.cache.backends.memcached.MemcachedCache'
-horizon::cache_server_ip: *control_node
+horizon::cache_server_ip: '127.0.0.1'
 horizon::cache_server_port: 11211
 
 # Keystone

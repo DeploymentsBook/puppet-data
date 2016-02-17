@@ -201,8 +201,8 @@ keystone::public_endpoint: &keystone_public_endpoint "http://%{hiera('control_no
 keystone::admin_endpoint: &keystone_admin_endpoint "http://%{hiera('control_node')}:35357"
 keystone::endpoint::public_url: *keystone_public_endpoint
 keystone::endpoint::admin_url: *keystone_admin_endpoint
-# Keystone v3 uses versionless endpoints
-keystone::endpoint::version: ''
+# Shamefully keep using v2.0 in the catalog until this works better
+keystone::endpoint::version: 'v2.0'
 glance::keystone::auth::public_url: &glance_url "http://%{hiera('control_node')}:9292"
 glance::keystone::auth::internal_url: *glance_url
 glance::keystone::auth::admin_url: *glance_url

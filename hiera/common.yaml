@@ -320,6 +320,7 @@ horizon::api_versions:
     'identity': 3
 horizon::compress_offline: false
 apache::default_vhost: false
+horizon::django_session_engine: 'django.contrib.sessions.backends.cache'
 
 # Keystone
 keystone::wsgi::apache::ssl: false

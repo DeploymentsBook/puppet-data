@@ -7,4 +7,5 @@
 
 :hierarchy:
   - "node/%{::fqdn}"
+  - override
   - common

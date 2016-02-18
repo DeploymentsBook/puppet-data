@@ -10,3 +10,4 @@ puppetdb.conf
 Gemfile.lock
 Puppetfile.lock
 .tmp/
+override.yaml

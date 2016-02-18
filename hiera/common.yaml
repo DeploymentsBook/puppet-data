@@ -6,17 +6,17 @@ this_node: &this_node "%{::ipaddress}"
 
 # Edit the following line to set the IP address of your Control node.
 # This is the node where the API services, mysql, and RabbitMQ run.
-control_node: &control_node '127.0.0.1'
+control_node: '127.0.0.1'
 
 # Edit the following line to set the IP address of your Compute node.
 # This is the node where VMs run.
-compute_node: &compute_node '127.0.0.1'
+compute_node: '127.0.0.1'
 
 # Edit the following line to set a test user password
-deployments::profile::users::password: "test"
+test_password: "test"
 
 # Edit the following line to set an admin user password
-admin_password: &admin_password "admin_pass"
+admin_password: "admin_pass"
 
 # Edit the following line to change the password for RabbitMQ.
 # Don't change the &rabbit_password portion.
@@ -95,7 +95,7 @@ neutron::agents::metadata::verbose: *verbose
 admin_tenant: &admin_tenant "openstack"
 admin_user: &admin_user "admin"
 region_name: &region_name "RegionOne"
-keystone::roles::admin::password: *admin_password
+keystone::roles::admin::password: "{hiera('admin_password')}"
 keystone::roles::admin::admin_tenant: *admin_tenant
 keystone::roles::admin::admin: *admin_user
 keystone::roles::admin::email: "root@%{hiera('control_node')}"
@@ -263,9 +263,9 @@ swift::proxy::authtoken::identity_uri: *keystone_admin_endpoint
 nova::os_region_name: *region_name
 nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true
-nova::vncproxy::host: *control_node
-nova::compute::vncproxy_host: *control_node
-nova::compute::vncserver_proxyclient_address: *compute_node
+nova::vncproxy::host: "{hiera('control_node')}"
+nova::compute::vncproxy_host: "{hiera('control_node')}"
+nova::compute::vncserver_proxyclient_address: "%{hiera('compute_node')}"
 nova::api::enabled: true
 nova::cert::enabled: true
 nova::compute::enabled: true
@@ -450,6 +450,7 @@ ironic::enable_drivers:
 # test user & openrc stuff
 deployments::profile::users::project: "test_project"
 deployments::profile::users::username: "test"
+deployments::profile::users::password: "%{hiera('test_password')}"
 deployments::profile::users::roles:
  - '_member_'
  - 'SwiftOperator'

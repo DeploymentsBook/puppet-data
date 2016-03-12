@@ -56,47 +56,47 @@ mod 'ntp',
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'glance',
   :git => 'https://github.com/openstack/puppet-glance.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'ceilometer',
   :git => 'https://github.com/openstack/puppet-ceilometer.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'neutron',
   :git => 'https://github.com/openstack/puppet-neutron.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'horizon',
   :git => 'https://github.com/openstack/puppet-horizon.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'swift',
   :git => 'https://github.com/openstack/puppet-swift.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'ironic',
   :git => 'https://github.com/openstack/puppet-ironic.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'openstack_extras',
   :git => 'https://github.com/openstack/puppet-openstack_extras.git',
-  :ref => 'stable/liberty'
+  :ref => 'master'
 
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',

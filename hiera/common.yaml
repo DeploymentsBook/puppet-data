@@ -62,6 +62,9 @@ neutron_subnet:
 # Version of CirrOS to install
 deployments::profile::glance::cirros_version: "0.3.4"
 
+# Which release of OpenStack to install
+deployments::profile::uca::release: "liberty"
+
 # Set to true to enable debug mode!
 debug: &debug "false"
 keystone::debug: *debug

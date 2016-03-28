@@ -1,7 +1,7 @@
 # Deployments module
 mod 'deployments',
   :git => 'https://github.com/DeploymentsBook/puppet-deployments.git',
-  :ref => 'master'
+  :ref => 'mitaka'
 
 # Puppet helpers
 mod 'stdlib',
@@ -56,47 +56,47 @@ mod 'ntp',
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'glance',
   :git => 'https://github.com/openstack/puppet-glance.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'ceilometer',
   :git => 'https://github.com/openstack/puppet-ceilometer.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'neutron',
   :git => 'https://github.com/openstack/puppet-neutron.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'horizon',
   :git => 'https://github.com/openstack/puppet-horizon.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'swift',
   :git => 'https://github.com/openstack/puppet-swift.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'ironic',
   :git => 'https://github.com/openstack/puppet-ironic.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'openstack_extras',
   :git => 'https://github.com/openstack/puppet-openstack_extras.git',
-  :ref => 'master'
+  :ref => 'stable/mitaka'
 
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',

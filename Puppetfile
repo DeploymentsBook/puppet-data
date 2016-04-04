@@ -90,6 +90,10 @@ mod 'ironic',
   :git => 'https://github.com/openstack/puppet-ironic.git',
   :ref => 'stable/liberty'
 
+mod 'tempest',
+  :git => 'https://github.com/openstack/puppet-tempest.git',
+  :ref => 'stable/liberty'
+
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
   :ref => 'stable/liberty'

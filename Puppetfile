@@ -92,7 +92,7 @@ mod 'ironic',
 
 mod 'tempest',
   :git => 'https://github.com/openstack/puppet-tempest.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',

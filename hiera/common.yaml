@@ -472,3 +472,9 @@ deployments::profile::openrcs::openrcs:
      "tenant": "%{hiera('deployments::profile::users::project')}"
      "user": "%{hiera('deployments::profile::users::username')}"
      "password": "%{hiera('deployments::profile::users::password')}"
+
+# tempest stuff
+deployments::tests::tempest::control_node: *control_node
+deployments::tests::tempest::admin_username: *admin_user
+deployments::tests::tempest::admin_password: *admin_password
+deployments::tests::tempest::admin_tenant_name: *admin_tenant

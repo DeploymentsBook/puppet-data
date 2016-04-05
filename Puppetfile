@@ -29,6 +29,11 @@ mod 'staging',
   :git => 'https://github.com/voxpupuli/puppet-staging.git',
   :ref => '1.0.4'
 
+# used by tempest
+mod 'vcsrepo',
+  :git => 'https://github.com/puppetlabs/puppetlabs-vcsrepo.git',
+  :ref => '1.3.2'
+
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
   :ref => '2.2.1'

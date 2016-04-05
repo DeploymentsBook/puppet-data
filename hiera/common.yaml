@@ -446,6 +446,17 @@ swift::proxy::proxy_local_net_ip: '127.0.0.1'
 swift::storage::all::storage_local_net_ip: '127.0.0.1'
 swift::storage::all::incoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
 swift::storage::all::outcoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
+# size will be seek * byte_size or 256M per device
+swift_loopback_devices:
+  '1':
+    'byte_size': '1024'
+    'seek': '256K'
+  '2':
+    'byte_size': '1024'
+    'seek': '256K'
+  '3':
+    'byte_size': '1024'
+    'seek': '256K'
 swift_ring_object_devices:
   '127.0.0.1:6000/1':
     'zone': 1
@@ -504,3 +515,7 @@ deployments::tests::tempest::control_node: *control_node
 deployments::tests::tempest::admin_username: *admin_user
 deployments::tests::tempest::admin_password: *admin_password
 deployments::tests::tempest::admin_tenant_name: *admin_tenant
+tempest::config::tempest_config:
+    object-storage/operator_role:
+        path: '/tmp/tempest/etc/tempest.conf' 
+        value: 'SwiftOperator'

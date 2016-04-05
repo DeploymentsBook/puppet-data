@@ -168,7 +168,7 @@ cinder::client::package_ensure: *package_ensure
 cinder::scheduler::package_ensure: *package_ensure
 ceilometer::package_ensure: *package_ensure
 ceilometer::client::ensure: *package_ensure
-ceilometer::agent::compute: *package_ensure
+ceilometer::agent::polling: *package_ensure
 keystone::package_ensure: *package_ensure
 glance::package_ensure: *package_ensure
 glance::api::package_ensure: *package_ensure
@@ -246,8 +246,8 @@ neutron::server::auth_uri: *keystone_public_endpoint
 neutron::server::identity_uri: *keystone_admin_endpoint
 neutron::server::notifications::auth_uri: *keystone_public_endpoint
 neutron::server::notifications::identity_uri: *keystone_admin_endpoint
-ceilometer::api::keystone_auth_uri: *keystone_public_endpoint
-ceilometer::api::keystone_identity_uri: *keystone_admin_endpoint
+ceilometer::api::auth_uri: *keystone_public_endpoint
+ceilometer::api::identity_uri: *keystone_admin_endpoint
 cinder::api::auth_uri: *keystone_public_endpoint
 # This seems to need a version on the endpoint to avoid #LP1521639
 cinder::api::keymgr_encryption_auth_url: "http://%{hiera('control_node')}:5000/v3"
@@ -289,6 +289,12 @@ nova::network::neutron::neutron_admin_password: *service_user_pass
 nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v2.0"
 nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 
+# Nova ceiloemeter conenctions
+nova::compute::instance_usage_audit: true
+nova::compute::instance_usage_audit_period: 'hour'
+nova::notify_on_state_change: 'vm_and_task_state'
+nova::notification_driver: 'messagingv2'
+
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'
 rabbit_host: &rabbit_host "%{hiera('control_node')}"
@@ -301,6 +307,9 @@ ceilometer::rabbit_userid: *rabbit_user
 cinder::rabbit_host: *rabbit_host
 cinder::rabbit_password: *rabbit_password
 cinder::rabbit_userid: *rabbit_user
+glance::notify::rabbitmq::rabbit_password: *rabbit_password
+glance::notify::rabbitmq::rabbit_userid: *rabbit_user
+glance::notify::rabbitmq::rabbit_host: *rabbit_host
 ironic::rabbit_host: *rabbit_host
 ironic::rabbit_password: *rabbit_password
 ironic::rabbit_userid: *rabbit_user
@@ -398,6 +407,9 @@ neutron::agents::ml2::ovs::bridge_mappings:
 # Ceilometer
 ceilometer::metering_secret: "ceilometer_secret"
 ceilometer::api::enabled: true
+ceilometer::agent::auth::auth_password: *service_user_pass
+ceilometer::agent::auth::auth_region: *region_name
+ceilometer::agent::auth::auth_url: *keystone_public_endpoint
 
 # Swift
 swift::keystone::auth::configure_endpoint: true

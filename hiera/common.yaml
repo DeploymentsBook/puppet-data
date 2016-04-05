@@ -196,6 +196,7 @@ neutron::ensure_package: *package_ensure
 neutron::plugins::ml2::ensure_package: *package_ensure
 openstacklib::openstackclient::package_ensure: *package_ensure
 swift::client::ensure: *package_ensure
+swift::client_package_ensure: *package_ensure
 swift::package_ensure: *package_ensure
 swift::storage::generic::package_ensure: *package_ensure
 swift::storage::object::package_ensure: *package_ensure

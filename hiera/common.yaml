@@ -64,6 +64,10 @@ deployments::profile::glance::cirros_version: "0.3.4"
 
 # Which release of OpenStack to install
 deployments::profile::uca::release: "mitaka"
+# Which pocket to use:
+# - use updates for a released version like Liberty
+# - use proposed for an unreleased version like Mitaka
+deployments::profile::uca::repo: "proposed"
 
 # Set to true to enable debug mode!
 debug: &debug "false"

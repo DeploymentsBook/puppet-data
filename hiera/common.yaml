@@ -440,6 +440,9 @@ swift_ring_object_devices:
   '127.0.0.1:6000/2':
     'zone': 1
     'weight': 1
+  '127.0.0.1:6000/3':
+    'zone': 1
+    'weight': 1
 swift_ring_container_devices:
   '127.0.0.1:6001/1':
     'zone': 1
@@ -447,11 +450,17 @@ swift_ring_container_devices:
   '127.0.0.1:6001/2':
     'zone': 1
     'weight': 1
+  '127.0.0.1:6001/3':
+    'zone': 1
+    'weight': 1
 swift_ring_account_devices:
   '127.0.0.1:6002/1':
     'zone': 1
     'weight': 1
   '127.0.0.1:6002/2':
+    'zone': 1
+    'weight': 1
+  '127.0.0.1:6002/3':
     'zone': 1
     'weight': 1
 

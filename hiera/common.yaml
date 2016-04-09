@@ -267,6 +267,7 @@ swift::proxy::authtoken::identity_uri: *keystone_admin_endpoint
 
 # Nova stuff
 nova::os_region_name: *region_name
+nova::api::sync_db_api: true
 nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true
 nova::vncproxy::host: *control_node

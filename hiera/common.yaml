@@ -150,6 +150,9 @@ ironic::db::mysql::password: *db_pass
 nova::db::database_connection: "mysql://%{hiera('nova::db::mysql::user')}:%{hiera('nova::db::mysql::password')}@127.0.0.1/nova"
 nova::db::mysql::user: "nova"
 nova::db::mysql::password: *db_pass
+nova::db::api_database_connection: "mysql://%{hiera('nova::db::mysql_api::user')}:%{hiera('nova::db::mysql_api::password')}@127.0.0.1/nova_api"
+nova::db::mysql_api::user: "nova_api"
+nova::db::mysql_api::password: *db_pass
 neutron::server::database_connection: "mysql://%{hiera('neutron::db::mysql::user')}:%{hiera('neutron::db::mysql::password')}@127.0.0.1/neutron"
 neutron::db::mysql::user: "neutron"
 neutron::db::mysql::password: *db_pass

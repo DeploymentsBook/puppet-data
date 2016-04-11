@@ -54,6 +54,7 @@ neutron_subnet:
     cidr: 203.0.113.0/24
     allocation_pools:
       - start=203.0.113.5,end=203.0.113.200
+    enable_dhcp: false
 
 # Version of CirrOS to install
 deployments::profile::glance::cirros_version: "0.3.4"

@@ -290,7 +290,7 @@ nova::glance_api_servers: *glance_url
 nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
 nova::network::neutron::neutron_admin_password: *service_user_pass
 # This below will not work without a version on the endpoint.
-nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v2.0"
+nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v3"
 nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 
 # Nova ceiloemeter conenctions

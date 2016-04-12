@@ -1,7 +1,7 @@
 # Deployments module
 mod 'deployments',
   :git => 'https://github.com/DeploymentsBook/puppet-deployments.git',
-  :ref => 'master'
+  :ref => 'mitaka'
 
 # Puppet helpers
 mod 'stdlib',
@@ -28,6 +28,11 @@ mod 'rabbitmq',
 mod 'staging',
   :git => 'https://github.com/voxpupuli/puppet-staging.git',
   :ref => '1.0.4'
+
+# used by tempest
+mod 'vcsrepo',
+  :git => 'https://github.com/puppetlabs/puppetlabs-vcsrepo.git',
+  :ref => '1.3.2'
 
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
@@ -56,51 +61,51 @@ mod 'ntp',
 # OpenStack Modules
 mod 'nova',
   :git => 'https://github.com/openstack/puppet-nova.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'glance',
   :git => 'https://github.com/openstack/puppet-glance.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'cinder',
   :git => 'https://github.com/openstack/puppet-cinder.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'ceilometer',
   :git => 'https://github.com/openstack/puppet-ceilometer.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'keystone',
   :git => 'https://github.com/openstack/puppet-keystone.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'neutron',
   :git => 'https://github.com/openstack/puppet-neutron.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'horizon',
   :git => 'https://github.com/openstack/puppet-horizon.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'swift',
   :git => 'https://github.com/openstack/puppet-swift.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'ironic',
   :git => 'https://github.com/openstack/puppet-ironic.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'tempest',
   :git => 'https://github.com/openstack/puppet-tempest.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'openstacklib',
   :git => 'https://github.com/openstack/puppet-openstacklib.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'openstack_extras',
   :git => 'https://github.com/openstack/puppet-openstack_extras.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
 
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',

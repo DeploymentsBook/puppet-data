@@ -60,7 +60,11 @@ neutron_subnet:
 deployments::profile::glance::cirros_version: "0.3.4"
 
 # Which release of OpenStack to install
-deployments::profile::uca::release: "liberty"
+deployments::profile::uca::release: "mitaka"
+# Which pocket to use:
+# - use updates for a released version like Liberty
+# - use proposed for an unreleased version like Mitaka
+deployments::profile::uca::repo: "proposed"
 
 # Set to true to enable debug mode!
 debug: &debug "false"
@@ -143,6 +147,9 @@ ironic::db::mysql::password: *db_pass
 nova::db::database_connection: "mysql://%{hiera('nova::db::mysql::user')}:%{hiera('nova::db::mysql::password')}@127.0.0.1/nova"
 nova::db::mysql::user: "nova"
 nova::db::mysql::password: *db_pass
+nova::db::api_database_connection: "mysql://%{hiera('nova::db::mysql_api::user')}:%{hiera('nova::db::mysql_api::password')}@127.0.0.1/nova_api"
+nova::db::mysql_api::user: "nova_api"
+nova::db::mysql_api::password: *db_pass
 neutron::server::database_connection: "mysql://%{hiera('neutron::db::mysql::user')}:%{hiera('neutron::db::mysql::password')}@127.0.0.1/neutron"
 neutron::db::mysql::user: "neutron"
 neutron::db::mysql::password: *db_pass
@@ -189,6 +196,7 @@ neutron::ensure_package: *package_ensure
 neutron::plugins::ml2::ensure_package: *package_ensure
 openstacklib::openstackclient::package_ensure: *package_ensure
 swift::client::ensure: *package_ensure
+swift::client_package_ensure: *package_ensure
 swift::package_ensure: *package_ensure
 swift::storage::generic::package_ensure: *package_ensure
 swift::storage::object::package_ensure: *package_ensure
@@ -246,8 +254,6 @@ neutron::server::notifications::identity_uri: *keystone_admin_endpoint
 ceilometer::api::auth_uri: *keystone_public_endpoint
 ceilometer::api::identity_uri: *keystone_admin_endpoint
 cinder::api::auth_uri: *keystone_public_endpoint
-# This seems to need a version on the endpoint to avoid #LP1521639
-cinder::api::keymgr_encryption_auth_url: "http://%{hiera('control_node')}:5000/v3"
 cinder::api::identity_uri: *keystone_admin_endpoint
 glance::api::auth_uri: *keystone_public_endpoint
 glance::api::identity_uri: *keystone_admin_endpoint
@@ -261,6 +267,7 @@ swift::proxy::authtoken::identity_uri: *keystone_admin_endpoint
 
 # Nova stuff
 nova::os_region_name: *region_name
+nova::api::sync_db_api: true
 nova::api::resume_guests_state_on_host_boot: true
 nova::api::service_neutron_metadata_proxy: true
 nova::vncproxy::host: *control_node
@@ -283,7 +290,7 @@ nova::glance_api_servers: *glance_url
 nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
 nova::network::neutron::neutron_admin_password: *service_user_pass
 # This below will not work without a version on the endpoint.
-nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v2.0"
+nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v3"
 nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 
 # Nova ceiloemeter conenctions
@@ -341,6 +348,8 @@ keystone::service_name: 'httpd'
 # cinder stuff
 cinder::setup_test_volume::size: 10G
 cinder::setup_test_volume::volume_path: '/var/lib/cinder/volumes'
+cinder::setup_test_volume::loopback_device: '/dev/loop2'
+cinder::setup_test_volume::volume_name: 'cinder-volumes'
 
 # Neutron
 neutron::allow_overlapping_ips: true
@@ -440,11 +449,25 @@ swift::proxy::proxy_local_net_ip: '127.0.0.1'
 swift::storage::all::storage_local_net_ip: '127.0.0.1'
 swift::storage::all::incoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
 swift::storage::all::outcoming_chmod: 'Du=rwx,g=rx,o=rx,Fu=rw,g=r,o=r'
+# size will be seek * byte_size or 256M per device
+swift_loopback_devices:
+  '1':
+    'byte_size': '1024'
+    'seek': '256K'
+  '2':
+    'byte_size': '1024'
+    'seek': '256K'
+  '3':
+    'byte_size': '1024'
+    'seek': '256K'
 swift_ring_object_devices:
   '127.0.0.1:6000/1':
     'zone': 1
     'weight': 1
   '127.0.0.1:6000/2':
+    'zone': 1
+    'weight': 1
+  '127.0.0.1:6000/3':
     'zone': 1
     'weight': 1
 swift_ring_container_devices:
@@ -454,11 +477,17 @@ swift_ring_container_devices:
   '127.0.0.1:6001/2':
     'zone': 1
     'weight': 1
+  '127.0.0.1:6001/3':
+    'zone': 1
+    'weight': 1
 swift_ring_account_devices:
   '127.0.0.1:6002/1':
     'zone': 1
     'weight': 1
   '127.0.0.1:6002/2':
+    'zone': 1
+    'weight': 1
+  '127.0.0.1:6002/3':
     'zone': 1
     'weight': 1
 
@@ -483,3 +512,13 @@ deployments::profile::openrcs::openrcs:
      "tenant": "%{hiera('deployments::profile::users::project')}"
      "user": "%{hiera('deployments::profile::users::username')}"
      "password": "%{hiera('deployments::profile::users::password')}"
+
+# tempest stuff
+deployments::tests::tempest::control_node: *control_node
+deployments::tests::tempest::admin_username: *admin_user
+deployments::tests::tempest::admin_password: *admin_password
+deployments::tests::tempest::admin_tenant_name: *admin_tenant
+tempest::config::tempest_config:
+    object-storage/operator_role:
+        path: '/tmp/tempest/etc/tempest.conf' 
+        value: 'SwiftOperator'

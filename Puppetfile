@@ -1,7 +1,7 @@
 # Deployments module
 mod 'deployments',
   :git => 'https://github.com/DeploymentsBook/puppet-deployments.git',
-  :ref => 'mitaka'
+  :ref => 'master'
 
 # Puppet helpers
 mod 'stdlib',

@@ -346,7 +346,7 @@ keystone::service_name: 'httpd'
 
 # cinder stuff
 cinder::setup_test_volume::size: 10G
-cinder::setup_test_volume::volume_path: '/var/lib/cinder/volumes'
+cinder::setup_test_volume::volume_path: '/var/lib/cinder'
 cinder::setup_test_volume::loopback_device: '/dev/loop2'
 cinder::setup_test_volume::volume_name: 'cinder-volumes'
 

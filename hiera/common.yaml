@@ -414,7 +414,7 @@ ceilometer::metering_secret: "ceilometer_secret"
 ceilometer::api::enabled: true
 ceilometer::agent::auth::auth_password: *service_user_pass
 ceilometer::agent::auth::auth_region: *region_name
-ceilometer::agent::auth::auth_url: *keystone_public_endpoint
+ceilometer::agent::auth::auth_url: "%{hiera('keystone::public_endpoint')}/v3"
 
 # Swift
 swift::keystone::auth::configure_endpoint: true

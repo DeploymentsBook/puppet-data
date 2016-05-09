@@ -415,6 +415,7 @@ ceilometer::api::enabled: true
 ceilometer::agent::auth::auth_password: *service_user_pass
 ceilometer::agent::auth::auth_region: *region_name
 ceilometer::agent::auth::auth_url: *keystone_public_endpoint
+ceilometer::agent::polling::ipmi_namespace: false
 
 # Swift
 swift::keystone::auth::configure_endpoint: true

@@ -414,7 +414,10 @@ ceilometer::metering_secret: "ceilometer_secret"
 ceilometer::api::enabled: true
 ceilometer::agent::auth::auth_password: *service_user_pass
 ceilometer::agent::auth::auth_region: *region_name
-ceilometer::agent::auth::auth_url: *keystone_public_endpoint
+ceilometer::agent::auth::auth_url: "http://%{hiera('control_node')}:5000/v3"
+ceilometer::agent::auth::auth_type: 'password'
+ceilometer::agent::auth::auth_user_domain_name: 'default'
+ceilometer::agent::auth::auth_project_domain_name: 'default'
 ceilometer::agent::polling::ipmi_namespace: false
 
 # Swift

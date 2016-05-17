@@ -232,6 +232,8 @@ nova::keystone::auth::admin_url: *nova_api_url
 nova::keystone::auth::internal_url_v3: *nova_api_url
 nova::keystone::auth::public_url_v3: *nova_api_url
 nova::keystone::auth::admin_url_v3: *nova_api_url
+nova::keystone::auth::service_name: 'Compute Service'
+nova::keystone::auth::service_name_v3: 'Compute Service v3'
 swift::keystone::auth::public_url: &swift_api_url "http://%{hiera('control_node')}:8080/v1/%{hiera('swift::proxy::keystone::reseller_prefix')}%(tenant_id)s"
 swift::keystone::auth::internal_url: *swift_api_url
 swift::keystone::auth::admin_url: "http://%{hiera('control_node')}:8080/v1"
@@ -289,7 +291,7 @@ nova::glance_api_servers: *glance_url
 nova::network::neutron::neutron_region_name: "%{hiera('region_name')}"
 nova::network::neutron::neutron_password: *service_user_pass
 # This below will not work without a version on the endpoint.
-nova::network::neutron::neutron_admin_auth_url: "%{hiera('keystone::admin_endpoint')}/v3"
+nova::network::neutron::neutron_auth_url: "%{hiera('keystone::admin_endpoint')}/v3"
 nova::network::neutron::neutron_url: "http://%{hiera('control_node')}:9696"
 
 # Nova ceiloemeter conenctions
@@ -297,6 +299,12 @@ nova::compute::instance_usage_audit: true
 nova::compute::instance_usage_audit_period: 'hour'
 nova::notify_on_state_change: 'vm_and_task_state'
 nova::notification_driver: 'messagingv2'
+
+# Glance stuff
+glance::api::stores:
+ - 'file'
+ - 'http'
+glance::api::default_store: 'file'
 
 # Rabbit
 rabbitmq::server::node_ip_address: '0.0.0.0'
@@ -371,7 +379,7 @@ neutron::service_plugins:
 
 # MTU settings for nova, neutron, and dnsmasq
 mtu: &mtu '1450'
-neutron::network_device_mtu: *mtu
+neutron::global_physnet_mtu: *mtu
 nova::compute::network_device_mtu: *mtu
 neutron::agents::dhcp::dnsmasq_config_file: '/etc/neutron/dnsmasq.conf'
 dnsmasq_conf_contents: "dhcp-option-force=26,%{hiera('mtu')}"
@@ -423,7 +431,8 @@ ceilometer::agent::polling::ipmi_namespace: false
 # Swift
 swift::keystone::auth::configure_endpoint: true
 swift::keystone::auth::configure_s3_endpoint: false
-swift::swift_hash_suffix: 'secret_hash'
+swift::swift_hash_path_suffix: 'secret_suffix'
+swift::swift_hash_path_prefix: 'secret_prefix'
 swift::storage: *control_node
 swift::proxy::pipeline:
  - 'catch_errors'

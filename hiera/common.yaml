@@ -377,9 +377,8 @@ neutron::agents::ml2::ovs::tunnel_types:
 neutron::service_plugins:
  - 'router'
 
-# MTU settings for nova, neutron, and dnsmasq
+# MTU settings for the nova compute network device and dnsmasq
 mtu: &mtu '1450'
-neutron::global_physnet_mtu: *mtu
 nova::compute::network_device_mtu: *mtu
 neutron::agents::dhcp::dnsmasq_config_file: '/etc/neutron/dnsmasq.conf'
 dnsmasq_conf_contents: "dhcp-option-force=26,%{hiera('mtu')}"

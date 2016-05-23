@@ -410,10 +410,9 @@ neutron::server::notifications::os_region_name: *region_name
 
 # change eth1 if you're using a different ethernet device for your traffic
 extnet_device: &extnet_device 'eth1'
-deployments::profile::neutron::extnet_device: *extnet_device
-neutron::agents::ml2::ovs::bridge_uplinks:
+bridge_uplinks:
  - "br-ex:%{hiera('extnet_device')}"
-neutron::agents::ml2::ovs::bridge_mappings:
+bridge_mappings:
  - "external:br-ex"
 
 # Ceilometer

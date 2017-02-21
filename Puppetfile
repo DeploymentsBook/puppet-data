@@ -109,4 +109,4 @@ mod 'openstack_extras',
 
 mod 'vswitch',
   :git => 'https://github.com/openstack/puppet-vswitch.git',
-  :ref => 'stable/liberty'
+  :ref => 'stable/mitaka'
